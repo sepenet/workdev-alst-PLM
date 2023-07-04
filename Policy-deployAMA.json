@@ -89,10 +89,6 @@
       "if": {
         "allOf": [
           {
-            "value": "[parameters('evaluationDelay')]",
-            "equals": true
-          },
-          {
             "field": "type",
             "equals": "Microsoft.Compute/virtualMachines"
           },
@@ -341,6 +337,7 @@
         "effect": "[parameters('effect')]",
         "details": {
           "type": "Microsoft.Compute/virtualMachines/extensions",
+          "evaluationDelay": "[parameters('evaluationDelay')]",
           "roleDefinitionIds": [
             "/providers/microsoft.authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c"
           ],
