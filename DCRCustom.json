@@ -1,0 +1,142 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "dataCollectionRules_ALST_PLM_VM_dcr_name": {
+            "defaultValue": "ALST-PLM-VM-dcr",
+            "type": "String"
+        },
+        "workspaces_ALST_PLM_VM_law_externalid": {
+            "defaultValue": "/subscriptions/acf57210-a818-4fb6-b44a-c48a2435377e/resourceGroups/ALST_PLM-VM/providers/Microsoft.OperationalInsights/workspaces/ALST-PLM-VM-law",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Insights/dataCollectionRules",
+            "apiVersion": "2022-06-01",
+            "name": "[parameters('dataCollectionRules_ALST_PLM_VM_dcr_name')]",
+            "location": "westeurope",
+            "kind": "Windows",
+            "properties": {
+                "dataSources": {
+                    "performanceCounters": [
+                        {
+                            "streams": [
+                                "Microsoft-Perf",
+                                "Microsoft-InsightsMetrics"
+                            ],
+                            "samplingFrequencyInSeconds": 60,
+                            "counterSpecifiers": [
+                                "\\Processor Information(*)\\% Processor Time",
+                                "\\Processor Information(*)\\% Privileged Time",
+                                "\\Processor Information(*)\\% User Time",
+                                "\\Processor Information(*)\\Processor Frequency",
+                                "\\System\\Processes",
+                                "\\Process(*)\\Thread Count",
+                                "\\Process(*)\\Handle Count",
+                                "\\Process(*)\\Processor Time",
+                                "\\Process(*)\\IO Read Bytes/Sec",
+                                "\\Process(*)\\IO Write Bytes/Sec",
+                                "\\System\\System Up Time",
+                                "\\System\\Context Switches/sec",
+                                "\\System\\Processor Queue Length",
+                                "\\Memory\\% Committed Bytes In Use",
+                                "\\Memory\\Available Bytes",
+                                "\\Memory\\Committed Bytes",
+                                "\\Memory\\Cache Bytes",
+                                "\\Memory\\Pool Paged Bytes",
+                                "\\Memory\\Pool Nonpaged Bytes",
+                                "\\Memory\\Pages/sec",
+                                "\\Memory\\Page Faults/sec",
+                                "\\Process(*)\\Working Set",
+                                "\\Process(*)\\Working Set - Private",
+                                "\\LogicalDisk(*)\\% Disk Time",
+                                "\\LogicalDisk(*)\\% Disk Read Time",
+                                "\\LogicalDisk(*)\\% Disk Write Time",
+                                "\\LogicalDisk(*)\\% Idle Time",
+                                "\\LogicalDisk(*)\\Disk Bytes/sec",
+                                "\\LogicalDisk(*)\\Disk Read Bytes/sec",
+                                "\\LogicalDisk(*)\\Disk Write Bytes/sec",
+                                "\\LogicalDisk(*)\\Disk Transfers/sec",
+                                "\\LogicalDisk(*)\\Disk Reads/sec",
+                                "\\LogicalDisk(*)\\Disk Writes/sec",
+                                "\\LogicalDisk(*)\\Avg. Disk sec/Transfer",
+                                "\\LogicalDisk(*)\\Avg. Disk sec/Read",
+                                "\\LogicalDisk(*)\\Avg. Disk sec/Write",
+                                "\\LogicalDisk(*)\\Avg. Disk Queue Length",
+                                "\\LogicalDisk(*)\\Avg. Disk Read Queue Length",
+                                "\\LogicalDisk(*)\\Avg. Disk Write Queue Length",
+                                "\\LogicalDisk(*)\\Current disk queue length",
+                                "\\PhysicalDisk(*)\\Current disk queue length",
+                                "\\LogicalDisk(*)\\% Free Space",
+                                "\\LogicalDisk(*)\\Free Megabytes",
+                                "\\Network Interface(*)\\Bytes Total/sec",
+                                "\\Network Interface(*)\\Bytes Sent/sec",
+                                "\\Network Interface(*)\\Bytes Received/sec",
+                                "\\Network Interface(*)\\Packets/sec",
+                                "\\Network Interface(*)\\Packets Sent/sec",
+                                "\\Network Interface(*)\\Packets Received/sec",
+                                "\\Network Interface(*)\\Packets Outbound Errors",
+                                "\\Network Interface(*)\\Packets Received Errors",
+                                "\\User Input Delay per Session\\Max Input Delay"
+
+                            ],
+                            "name": "perfCounterDataSource60"
+                        }
+                    ],
+                    "windowsEventLogs": [
+                        {
+                            "streams": [
+                                "Microsoft-Event"
+                            ],
+                            "xPathQueries": [
+                                "Application!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]",
+                                "System!*[System[(Level=1 or Level=2 or Level=3 or Level=4 or Level=0)]]"
+                            ],
+                            "name": "eventLogsDataSource"
+                        }
+                    ]
+                },
+                "destinations": {
+                    "logAnalytics": [
+                        {
+                            "workspaceResourceId": "[parameters('workspaces_ALST_PLM_VM_law_externalid')]",
+                            "name": "la-2077578774"
+                        }
+                    ],
+                    "azureMonitorMetrics": {
+                        "name": "azureMonitorMetrics-default"
+                    }
+                },
+                "dataFlows": [
+                    {
+                        "streams": [
+                            "Microsoft-InsightsMetrics"
+                        ],
+                        "destinations": [
+                            "azureMonitorMetrics-default"
+                        ]
+                    },
+                    {
+                        "streams": [
+                            "Microsoft-Perf"
+                        ],
+                        "destinations": [
+                            "la-2077578774"
+                        ]
+                    },
+                    {
+                        "streams": [
+                            "Microsoft-Event"
+                        ],
+                        "destinations": [
+                            "la-2077578774"
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
