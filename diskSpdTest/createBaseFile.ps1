@@ -1,0 +1,5 @@
+Set-Content -Path CPU.csv "CPU |  Usage |  User  |  Kernel |  Idle |  vmName  | datetimeUTC | type"
+Set-content -Path TotalIO.csv "thread |       bytes     |     I/Os     |    MiB/s   |  I/O per s |  AvgLat  | LatStdDev |  file | vmName | date | timeUTC | type" 
+Set-content -Path ReadIO.csv "thread |       bytes     |     I/Os     |    MiB/s   |  I/O per s |  AvgLat  | LatStdDev |  file | vmName | date | timeUTC | type"
+Set-content -Path WriteIO.csv "thread |       bytes     |     I/Os     |    MiB/s   |  I/O per s |  AvgLat  | LatStdDev |  file | vmName | date | timeUTC | type"
+Set-content -Path ReadLatency.csv " %-ile |  Read (ms) | Write (ms) | Total (ms)| vmName | date | timeUTC | type"
