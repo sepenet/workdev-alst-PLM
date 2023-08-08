@@ -4,7 +4,9 @@ to perfrom the raw disk test, diskspd.exe is going to be used
 
 ## Get diskspd.exe
 
-from an administrator powershell on the VM 
+tool is available here : https://github.com/Microsoft/diskspd/releases
+
+Download the ZIP file and use the amd64 version. the following command line can be used to do it from a powershell administrator window on the VM
 ```powershell
 d:
 mkdir speedTest
@@ -13,9 +15,6 @@ Invoke-WebRequest -Uri https://github.com/microsoft/diskspd/releases/download/v2
 Expand-Archive .\DiskSpd.ZIP
 
 ```
-tool is available here : https://github.com/Microsoft/diskspd/releases
-
-Download the ZIP file and use the amd64 version. 
 
 ## diskspd.exe command line  to execute
 
@@ -36,7 +35,7 @@ D:\speedTest\DiskSpd\amd64\diskspd.exe -d300 -W15 -C15 -L -r -w40 -t8 -b64K -Su 
 - add a line to the file buildData.
 - select all content of file buildData and copy.
 - Paste it in a powershell window.
-> current directory of the powershell windows should be the folder containint the file buildData, createBuildData.ps1, createFile.ps1 and dataSource folder
+> current directory of the powershell windows should be the folder containing the file buildData, createBuildData.ps1, createFile.ps1 and dataSource folder
 
 ### update the powerbi report
 
