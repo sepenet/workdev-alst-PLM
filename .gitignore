@@ -1,5 +1,6 @@
 dataSource/
 report/
+dcr-Rules/
 *.pbix
 CPU.csv
 ReadIO.csv
