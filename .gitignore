@@ -7,3 +7,4 @@ ReadIO.csv
 WriteIO.csv
 TotalIO.csv
 ReadLatency.csv
+azcopy.exe
