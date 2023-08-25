@@ -32,6 +32,12 @@
 .\createFile.ps1 .\dataSource\pssdpreloader15 "Premium SSD with preloader"
 .\createFile.ps1 .\dataSource\pssdpreloader16 "Premium SSD with preloader"
 .\createFile.ps1 .\dataSource\pssdpreloader17 "Premium SSD with preloader"
+.\createFile.ps1 .\dataSource\pssdpreloader18 "Premium SSD with preloader"
+.\createFile.ps1 .\dataSource\pssdpreloader19 "Premium SSD with preloader"
+.\createFile.ps1 .\dataSource\pssdpreloader20 "Premium SSD with preloader"
+.\createFile.ps1 .\dataSource\pssdpreloader21 "Premium SSD with preloader"
+.\createFile.ps1 .\dataSource\pssdpreloader22 "Premium SSD with preloader"
+.\createFile.ps1 .\dataSource\pssdpreloader23 "Premium SSD with preloader"
 .\createFile.ps1 .\dataSource\pssdnopreloader1 "Premium SSD no preloader"
 .\createFile.ps1 .\dataSource\pssdnopreloader2 "Premium SSD no preloader"
 .\createFile.ps1 .\dataSource\pssdnopreloader3 "Premium SSD no preloader"
@@ -39,3 +45,4 @@
 .\createFile.ps1 .\dataSource\pssdnopreloader5 "Premium SSD no preloader"
 .\createFile.ps1 .\dataSource\pssdnopreloader6 "Premium SSD no preloader"
 .\createFile.ps1 .\dataSource\pssdnopreloader7 "Premium SSD no preloader"
+ 
