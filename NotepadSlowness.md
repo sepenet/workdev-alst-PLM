@@ -20,7 +20,7 @@ Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2165884 -outFile 
 - uncheck all except windows performance toolkit and click install
 ![WPT](image-5.png)
 - wait for the installation to complete and click close
-- run the following command to download the xperfStartup.zip file
+- run the following command to download the xperfStartup.ps1 file
 ```powershell
 Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1
 ```
@@ -37,4 +37,6 @@ command prompt windows open automatically after the trace is stopped to save it 
 ![savefile](image-7.png)
 - Navigate to d:\xperf folder and you will find the file with the name **startup-<date and time>**
 ![etlfile](image-8.png)
+
+>[!IMPORTANT]
 > do not stop the VM without saving the file, if you do so, you will **loose the file** as store on temporay store D: 
