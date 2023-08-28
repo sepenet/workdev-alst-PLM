@@ -31,6 +31,8 @@ d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
 ```
 traces collection will start and last **15min** and will be saved in d:\xperf folder
 ![xperf](image-6.png)
+
+- reproduce the issue while the trace is running
 > you can stop the trace by pressing **ctrl+c** in the command prompt
 > you might have to do ctrl+c twice to stop the trace
 command prompt windows open automatically after the trace is stopped to save it in the file, let it runs and close automatically
