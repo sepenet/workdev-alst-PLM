@@ -1,6 +1,7 @@
 dataSource/
 report/
 dcr-Rules/
+PLMStartTime/
 *.pbix
 CPU.csv
 ReadIO.csv
