@@ -52,7 +52,7 @@
     $RG=$VMPROPERTIES.psobject.properties["resourcegroupname"].value
     $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
     $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
-    powershell.exe {d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True}
+    Start-Process powershell {d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True}
     $PLMSTARTTIME=get-date -format "HH:mm:ss"
     echo "It is now time to start PLM application, perform the test and stop the trace and come back here to press enter when finished."
     pause
