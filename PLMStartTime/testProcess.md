@@ -63,7 +63,8 @@
     echo "$HOSTNAME,$RG,$VMIDVALUE,$PLMSTARTTIME,$PLMSTOPTIME" | out-file -append d:\vmInfo.txt
     ```
 >[!WARNING]
-> traces collection will start and last **15min** and will be saved in d:\xperf folder 
+> traces collection will start and last **15min** and will be saved in d:\xperf folder
+
 > you can stop the trace by pressing **ctrl+c** in the command prompt 
 > you might have to do ctrl+c twice to stop the trace 
 
