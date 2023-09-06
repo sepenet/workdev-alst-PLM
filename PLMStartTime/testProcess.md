@@ -59,6 +59,10 @@
     $PLMSTOPTIME=get-date -format "HH:mm:ss"
     echo "HOSTNAME,RG,VMIDVALUE,PLMSTARTTIME,PLMSTOPTIME" | out-file d:\vmInfo.txt
     echo "$HOSTNAME,$RG,$VMIDVALUE,$PLMSTARTTIME,$PLMSTOPTIME" | out-file -append d:\vmInfo.txt
+    mv d:\vmInfo.txt d:\xperf
+    $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
+    mv d:\xperf\ d:\$HOSTNAME-$DATETIME
+    d:\azcopy.exe copy d:\$HOSTNAME-$DATETIME 'https://sebuploadfiles.blob.core.windows.net/xperf?sp=acw&st=2023-09-06T16:35:27Z&se=2023-09-07T00:35:27Z&spr=https&sv=2022-11-02&sr=c&sig=YaW6N40zb8JoY0TSfs%2FPr1jUasFI53ZW20FuRDQSkPA%3D' --recursive
     ```
 >[!IMPORTANT]
 > traces collection will start and last **15min** and will be saved in d:\xperf folder
@@ -76,27 +80,9 @@ command prompt windows open automatically after the trace is stopped to save it 
 > do not stop the VM without saving the file, if you do so, you will **loose the file** as store on temporay store D: 
 
 
-```powershell
-d: 
-mkdir speedTest
-Invoke-WebRequest -Uri https://github.com/microsoft/diskspd/releases/download/v2.1/DiskSpd.ZIP -outFile d:\speedTest\DiskSpd.ZIP
-Expand-Archive -path d:\speedTest\DiskSpd.ZIP -DestinationPath d:\speedTest\DiskSpd
-echo "hostname,start time diskspd test,start time PLM app,stop time APP PLM" > d:\plmStart.txt
-hostname >> d:\plmStart.txt
-get-date -format "HH:mm:ss" >> d:\plmStart.txt
-D:\speedTest\DiskSpd\amd64\diskspd.exe -d300 -W15 -C15 -L -r -w40 -t8 -b64K -Su -c10G C:\CATIA_V6_21X_FD14\perfdisk.io > D:\speedTest\plmVDIb64_01
-pause
-get-date -format "HH:mm:ss" >> d:\plmStart.txt
-&'C:\Program Files\PLM4AUpdater\PLM4AUpdater.exe' "C:\Users\201039351\AppData\Local\PLM4ALauncher\INT\PLM4ALauncher_474ADE038B803AF8BDE177E432CB69D8.plm4a"
-pause
-get-date -format "HH:mm:ss" >> d:\plmStart.txt
-D:\speedTest\DiskSpd\amd64\diskspd.exe -d300 -W15 -C15 -L -r -w40 -t8 -b64K -Su -c10G C:\CATIA_V6_21X_FD14\perfdisk.io > D:\speedTest\plmVDIb64_02
-notepad d:\plmStart.txt
-notepad D:\speedTest\plmVDIb64_02
-notepad D:\speedTest\plmVDIb64_01
-```
-
 ## including diskspd test.
+>[!IMPORTANT]
+> this is not up to date -- DO NOT USE-- Only kept for reference
 
 ```powershell
 d: 
