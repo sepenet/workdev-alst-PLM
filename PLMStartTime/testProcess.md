@@ -32,6 +32,13 @@
     Import-module az.resources
     Connect-AzAccount -identity
     ```
+### dowload azcopy
+
+- [ ] run the following commands to download and expand azcopy
+    ```powershell
+    Invoke-WebRequest -Uri https://aka.ms/downloadazcopy-v10-windows -outfile d:\azcopy.zip
+    Expand-Archive -path d:\speedTest\azcopy.zip -destinationpath d:
+    ```
 
 ### dowload the script to start the trace.
 
