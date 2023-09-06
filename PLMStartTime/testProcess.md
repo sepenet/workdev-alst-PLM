@@ -24,13 +24,16 @@
     Import-module az.resources
     Connect-AzAccount -identity
     ```
+>[!IMPORTANT]
+> Accept the policy change by typing  **A**
+
 ### dowload azcopy
 
 - [ ] run the following commands to download and expand azcopy
     ```powershell
     Invoke-WebRequest -Uri https://aka.ms/downloadazcopy-v10-windows -outfile d:\azcopy.zip
     Expand-Archive -path d:\azcopy.zip -destinationpath d:
-    mv d:\azcopy_windows_*\azcopy.exe ..
+    mv d:\azcopy_windows_*\azcopy.exe d:\azcopy.exe
     ```
 
 ### dowload the script to start the trace.

@@ -22,7 +22,7 @@ param(
 
 [Console]::TreatControlCAsInput = $true
     
-$xperfpath = "D:\ADK\wpr.exe"
+$xperfpath = "C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\wpr.exe"
 $TraceCaptureDuration = 15 * 60
 
 
