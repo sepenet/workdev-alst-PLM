@@ -37,7 +37,8 @@
 - [ ] run the following commands to download and expand azcopy
     ```powershell
     Invoke-WebRequest -Uri https://aka.ms/downloadazcopy-v10-windows -outfile d:\azcopy.zip
-    Expand-Archive -path d:\speedTest\azcopy.zip -destinationpath d:
+    Expand-Archive -path d:\azcopy.zip -destinationpath d:
+    mv d:\azcopy_windows_*\azcopy.exe ..
     ```
 
 ### dowload the script to start the trace.
