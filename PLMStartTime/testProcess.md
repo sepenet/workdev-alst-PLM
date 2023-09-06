@@ -4,15 +4,12 @@
 
 ### Install ADKsetup tool
 
-- [ ] Open powershell windows as an administrator and run the below command to download the ADKsetup tool. 
+- [ ] Open powershell windows as an administrator and run the below command to download the ADKsetup tool.
     ```powershell
     Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2165884 -outFile d:\adksetup.exe
+    d:\adksetup.exe
     ```
-- [ ] Open explorer and navigate to d: drive.
-- [ ] right click on adksetup.exe and select run as administrator, **provide administrator** credentials if prompted.
-
-![Run-as-admin](image-3.png)
-- [ ] in "Spécify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
+- [ ] in "Specify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
 ![location](image-4.png)
 - [ ] Select the privacy yes or no and click "**next**"
 - [ ] Read and accept the license terms and click "**next**"
