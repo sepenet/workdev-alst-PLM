@@ -10,6 +10,7 @@
     ```
 - [ ] Open explorer and navigate to d: drive.
 - [ ] right click on adksetup.exe and select run as administrator, **provide administrator** credentials if prompted.
+
 ![Run-as-admin](image-3.png)
 - [ ] in "Spécify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
 ![location](image-4.png)
