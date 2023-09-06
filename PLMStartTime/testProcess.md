@@ -1,6 +1,6 @@
 # PLM test process to start PLM and record start and stop times
 
-## not including diskspd test
+## without disk speed test
 
 ### Install ADKsetup tool
 
@@ -21,7 +21,10 @@
 
 ### Install Az powershell module.
 
-- [ ] Install the Az powershell module by running the following command in powershell as an administrator `Install-Module -Name Az -AllowClobber`.
+- [ ] Install the Az powershell module by running the following command in powershell as an administrator 
+    ```powershell
+    Install-Module -Name Az -AllowClobber
+    ```
 > Accept the installation of the module by typing  **A** or **Y** and press enter
 > this will take few minutes to complete
 
@@ -29,7 +32,10 @@
 
 ### dowload the script to start the trace.
 
-- [ ] run the following command to download the xperfStartup.ps1 file `Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1`
+- [ ] run the following command to download the xperfStartup.ps1 file 
+    ```powershell
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1
+    ```
 - [ ] run the 2 following command to create folder to store the output file and to start the trace
     ```powershell
     mkdir d:\xperf
