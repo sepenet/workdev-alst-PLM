@@ -23,10 +23,19 @@
 
 - [ ] Install the Az powershell module by running the following command in powershell as an administrator 
     ```powershell
-    Install-Module -Name Az -AllowClobber
+    Install-Module -Name Az.accounts,Az.Resources,Az-Compute -AllowClobber
     ```
 > Accept the installation of the module by typing  **A** or **Y** and press enter
 > this will take few minutes to complete
+- [ ] import the module and run the following command to login to azure
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
+    Import-module az.accounts
+    Import-module az.resources
+    import-module az.compute
+    Connect-AzAccount -identity
+    get-azvm -name $HOSTNAME | where-object {$_.VmId}
+    ```
 
  
 
@@ -36,9 +45,10 @@
     ```powershell
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1
     ```
-- [ ] run the 2 following command to create folder to store the output file and to start the trace
+- [ ] run the following commands to create folder to collect VM info and to start the xperf recording
     ```powershell
     mkdir d:\xperf
+    get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname SDC3-07839-UAT-CVD-01-RG > d:\vmInfo.txt
     d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
     ```
 >[!IMPORTANT]
