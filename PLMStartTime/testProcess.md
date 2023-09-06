@@ -9,7 +9,7 @@
     Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2165884 -outFile d:\adksetup.exe
     ```
 - [ ] Open explorer and navigate to d: drive.
-- [ ]right click on adksetup.exe and select run as administrator, **provide administrator** credentials if prompted.
+- [ ] right click on adksetup.exe and select run as administrator, **provide administrator** credentials if prompted.
     ![Run-as-admin](image-3.png)
 - [ ] in "Spécify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
     ![location](image-4.png)
@@ -21,35 +21,42 @@
 
 ### Install Az powershell module.
 
-- [ ] Install the Az powershell module by running the following command in powershell as an administrator 
+- [ ] Install the Az powershell module by running the following command in powershell windows as an administrator 
     ```powershell
     Install-Module -Name Az.accounts,Az.Resources,Az-Compute -AllowClobber
     ```
-> Accept the installation of the module by typing  **A** or **Y** and press enter
+> Accept the installation of the module and dependencies by typing  **A** or **Y** and press enter
 > this will take few minutes to complete
-- [ ] import the module and run the following command to login to azure
+- [ ] Run the followinf commands to import the modules, login to azure using the user assigned managed identity, and get the vmID
     ```powershell
     Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
     Import-module az.accounts
     Import-module az.resources
     import-module az.compute
     Connect-AzAccount -identity
-    get-azvm -name $HOSTNAME | where-object {$_.VmId}
     ```
-
- 
 
 ### dowload the script to start the trace.
 
-- [ ] run the following command to download the xperfStartup.ps1 file 
+- [ ] run the following commands to create  to download the xperfStartup.ps1 file 
     ```powershell
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1
     ```
 - [ ] run the following commands to create folder to collect VM info and to start the xperf recording
     ```powershell
     mkdir d:\xperf
-    get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname SDC3-07839-UAT-CVD-01-RG > d:\vmInfo.txt
+    $HOSTNAME=$env:computername
+    $VMPROPERTIES=get-azvm -name $HOSTNAME
+    $RG=$VMPROPERTIES.psobject.properties["resourcegroupname"].value
+    $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
+    $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
     d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
+    $PLMSTARTTIME=get-date -format "HH:mm:ss"
+    echo "It is now time to start PLM application, perform the test and stop the trace and come back here to press enter when finished."
+    pause
+    $PLMSTOPTIME=get-date -format "HH:mm:ss"
+    echo "HOSTNAME,RG,VMIDVALUE,PLMSTARTTIME,PLMSTOPTIME" | out-file d:\vmInfo.txt
+    echo "$HOSTNAME,$RG,$VMIDVALUE,$PLMSTARTTIME,$PLMSTOPTIME" | out-file -append d:\vmInfo.txt
     ```
 >[!IMPORTANT]
 > traces collection will start and last **15min** and will be saved in d:\xperf folder
