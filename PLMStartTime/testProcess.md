@@ -44,6 +44,8 @@
     ```powershell
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1
     ```
+### Start collecting the trace
+
 - [ ] run the following commands to create folder to collect VM info and to start the xperf recording
     ```powershell
     mkdir d:\xperf
@@ -59,12 +61,8 @@
     $PLMSTOPTIME=get-date -format "HH:mm:ss"
     echo "HOSTNAME,RG,VMIDVALUE,PLMSTARTTIME,PLMSTOPTIME" | out-file d:\vmInfo.txt
     echo "$HOSTNAME,$RG,$VMIDVALUE,$PLMSTARTTIME,$PLMSTOPTIME" | out-file -append d:\vmInfo.txt
-    mv d:\vmInfo.txt d:\xperf
-    $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
-    mv d:\xperf\ d:\$HOSTNAME-$DATETIME
-    d:\azcopy.exe copy d:\$HOSTNAME-$DATETIME 'https://sebuploadfiles.blob.core.windows.net/xperf?sp=acw&st=2023-09-06T16:35:27Z&se=2023-09-07T00:35:27Z&spr=https&sv=2022-11-02&sr=c&sig=YaW6N40zb8JoY0TSfs%2FPr1jUasFI53ZW20FuRDQSkPA%3D' --recursive
     ```
->[!IMPORTANT]
+>[!WARNING]
 > traces collection will start and last **15min** and will be saved in d:\xperf folder
 > you can stop the trace by pressing **ctrl+c** in the command prompt
 > you might have to do ctrl+c twice to stop the trace
@@ -77,6 +75,15 @@ command prompt windows open automatically after the trace is stopped to save it 
 >[!IMPORTANT]
 > do not stop the VM without saving the file, if you do so, you will **loose the file** as store on temporay store D: 
 
+### save the file to blob storage
+
+- [ ] run the following command to save the traces to blob storage. 
+    ```powershell
+    mv d:\vmInfo.txt d:\xperf
+    $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
+    mv d:\xperf\ d:\$HOSTNAME-$DATETIME
+    d:\azcopy.exe copy d:\$HOSTNAME-$DATETIME 'https://sebuploadfiles.blob.core.windows.net/xperf?sp=acw&st=2023-09-06T16:35:27Z&se=2023-09-07T00:35:27Z&spr=https&sv=2022-11-02&sr=c&sig=YaW6N40zb8JoY0TSfs%2FPr1jUasFI53ZW20FuRDQSkPA%3D' --recursive
+    ```
 
 ## including diskspd test.
 >[!IMPORTANT]
