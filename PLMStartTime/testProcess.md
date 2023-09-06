@@ -27,7 +27,7 @@
     Connect-AzAccount -identity
     ```
 >[!IMPORTANT]
-> Accept the policy change by typing  **A**
+> Accept the execution policy change by typing  **A**
 
 ### dowload azcopy
 
@@ -66,11 +66,9 @@
     ```
 >[!IMPORTANT]
 > traces collection will start and last **15min** and will be saved in d:\xperf folder
-> ![xperf](image-6.png)
-
-- [ ] execute the following command
 > you can stop the trace by pressing **ctrl+c** in the command prompt
 > you might have to do ctrl+c twice to stop the trace
+![xperf](image-6.png)
 command prompt windows open automatically after the trace is stopped to save it in the file, let it runs and close automatically
 ![savefile](image-7.png)
 - Navigate to d:\xperf folder and you will find the file with the name **startup-<date and time>**
