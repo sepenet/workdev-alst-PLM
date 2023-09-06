@@ -21,7 +21,7 @@
 
 - [ ] Install the Az powershell module by running the following command in powershell windows as an administrator 
     ```powershell
-    Install-Module -Name Az.accounts,Az.Resources,Az-Compute -AllowClobber
+    Install-Module -Name Az.accounts,Az.Resources -AllowClobber
     ```
 > Accept the installation of the module and dependencies by typing  **A** or **Y** and press enter
 > this will take few minutes to complete
@@ -30,7 +30,6 @@
     Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
     Import-module az.accounts
     Import-module az.resources
-    import-module az.compute
     Connect-AzAccount -identity
     ```
 
