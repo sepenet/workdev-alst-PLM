@@ -14,6 +14,7 @@
 - [ ] Install the Az powershell module by running the following command in powershell windows as an administrator 
     ```powershell
     Install-Module -Name Az.accounts,Az.Resources -AllowClobber
+    Install-Module -Name Az.Compute
     ```
 > Accept the installation of the module and dependencies by typing  **A** or **Y** and press enter
 > this will take few minutes to complete
@@ -22,6 +23,7 @@
     Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
     Import-module az.accounts
     Import-module az.resources
+    Import-module az.compute
     Connect-AzAccount -identity
     ```
 >[!IMPORTANT]
@@ -50,7 +52,7 @@
     $RG=$VMPROPERTIES.psobject.properties["resourcegroupname"].value
     $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
     $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
-    d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
+    powershell.exe {d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True}
     $PLMSTARTTIME=get-date -format "HH:mm:ss"
     echo "It is now time to start PLM application, perform the test and stop the trace and come back here to press enter when finished."
     pause
