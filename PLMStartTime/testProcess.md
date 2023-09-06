@@ -10,13 +10,13 @@
     ```
 - [ ] Open explorer and navigate to d: drive.
 - [ ] right click on adksetup.exe and select run as administrator, **provide administrator** credentials if prompted.
-    ![Run-as-admin](image-3.png)
+![Run-as-admin](image-3.png)
 - [ ] in "Spécify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
-    ![location](image-4.png)
+![location](image-4.png)
 - [ ] Select the privacy yes or no and click "**next**"
 - [ ] Read and accept the license terms and click "**next**"
 - [ ] uncheck all except windows performance toolkit and click "**install**"
-    ![WPT](image-5.png)
+![WPT](image-5.png)
 - [ ] wait for the installation to complete and click "**close**"
 
 ### Install Az powershell module.
