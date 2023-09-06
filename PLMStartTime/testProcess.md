@@ -4,19 +4,11 @@
 
 ### Install ADKsetup tool
 
-- [ ] Open powershell windows as an administrator and run the below command to download the ADKsetup tool.
+- [ ] Open powershell as Administrator and run the below command to download the ADKsetup tool.
     ```powershell
     Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2165884 -outFile d:\adksetup.exe
-    d:\adksetup.exe
+    d:\adksetup.exe /quiet /installpath d:\ADK /features OptionId.WindowsPerformanceToolkit
     ```
-- [ ] in "Specify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
-![location](image-4.png)
-- [ ] Select the privacy yes or no and click "**next**"
-- [ ] Read and accept the license terms and click "**next**"
-- [ ] uncheck all except windows performance toolkit and click "**install**"
-![WPT](image-5.png)
-- [ ] wait for the installation to complete and click "**close**"
-
 ### Install Az powershell module.
 
 - [ ] Install the Az powershell module by running the following command in powershell windows as an administrator 
