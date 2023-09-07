@@ -7,7 +7,7 @@
 - [ ] Open powershell as Administrator and run the below command to download the ADKsetup tool.
     ```powershell
     Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2165884 -outFile d:\adksetup.exe
-    d:\adksetup.exe /quiet /installpath d:\ADK /features OptionId.WindowsPerformanceToolkit
+    d:\adksetup.exe /quiet /installpath /features OptionId.WindowsPerformanceToolkit
     ```
 ### Install Az powershell module.
 
@@ -29,13 +29,13 @@
 >[!IMPORTANT]
 > Accept the execution policy change by typing  **A**
 
-### dowload azcopy
+<!-- ### dowload azcopy
 
 - [ ] run the following commands to download and expand azcopy
     ```powershell
     Invoke-WebRequest -Uri https://aka.ms/downloadazcopy-v10-windows -outfile d:\azcopy.zip
     Expand-Archive -path d:\azcopy.zip -destinationpath d:
-    mv d:\azcopy_windows_*\azcopy.exe d:\azcopy.exe
+    mv d:\azcopy_windows_*\azcopy.exe d:\azcopy.exe -->
     ```
 
 ### dowload the script to start the trace.
@@ -54,37 +54,43 @@
     $RG=$VMPROPERTIES.psobject.properties["resourcegroupname"].value
     $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
     $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
-    Start-Process powershell {d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True}
-    $PLMSTARTTIME=get-date -format "HH:mm:ss"
-    echo "It is now time to start PLM application, perform the test and stop the trace and come back here to press enter when finished."
-    pause
-    $PLMSTOPTIME=get-date -format "HH:mm:ss"
-    echo "HOSTNAME,RG,VMIDVALUE,PLMSTARTTIME,PLMSTOPTIME" | out-file d:\vmInfo.txt
-    echo "$HOSTNAME,$RG,$VMIDVALUE,$PLMSTARTTIME,$PLMSTOPTIME" | out-file -append d:\vmInfo.txt
+    $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
+    echo "HOSTNAME,RG,VMIDVALUE,PLMSTARTTIME,PLMSTOPTIME" | out-file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
+    echo "$HOSTNAME,$RG,$VMIDVALUE,$PLMSTARTTIME,$PLMSTOPTIME" | out-file -append d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
+    d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
+    mv d:\xperf\*.etl d:\xperf\$HOSTNAME-$DATETIME.etl
+    & 'C:\Program Files\7-Zip\7z.exe' a -T7z D:\$HOSTNAME-$DATETIME.7z D:\xperf\*
     ```
->[!WARNING]
+    
+    
+    ```
+>[!IMPORTANT]
 > traces collection will start and last **15min** and will be saved in d:\xperf folder.
-> you can stop the trace by pressing **ctrl+c** in the command prompt.
-> you might have to do ctrl+c twice to stop the trace.
+> You can stop the trace by pressing **ctrl+c** in the command prompt.
+> You might have to do ctrl+c __twice__ to stop the trace.
 
 ![xperf](image-6.png)
 command prompt windows open automatically after the trace is stopped to save it in the file, let it runs and close automatically
 ![savefile](image-7.png)
-- Navigate to d:\xperf folder and you will find the file with the name **startup-<date and time>**
-![etlfile](image-8.png)
 
->[!IMPORTANT]
+>[!WARNING]
 > do not stop the VM without saving the file, if you do so, you will **loose the file** as store on temporay store D: 
 
-### save the file to blob storage
 
-- [ ] run the following command to save the traces to blob storage. 
+
+
+### save the file to FTP support ticket
+
+- [ ] open edge browser and go to [File Transfer - Case 2309060050003065](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsupport.microsoft.com%2Ffiles%3Fworkspace%3DeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ3c2lkIjoiMDBhOTkxYjItNDU0OS00NTc3LWI2MTgtZWQzY2YyNzliNGRlIiwic3IiOiIyMzA5MDYwMDUwMDAzMDY1IiwiYXBwaWQiOiJlNmVlNDNlYi0wZmJjLTQ1NDYtYmM1Mi00YzE2MWZjZGY0YzQiLCJzdiI6InYxIiwicnMiOiJFeHRlcm5hbCIsInd0aWQiOiIzNzc0YTY2Ni00ZDBjLTQ0NjUtYjQzYS01ZDcyNzBiMmM0ZWQiLCJpc3MiOiJodHRwczovL2FwaS5kdG1uZWJ1bGEubWljcm9zb2Z0LmNvbSIsImF1ZCI6Imh0dHA6Ly9zbWMiLCJleHAiOjE3MDE3ODYyNzQsIm5iZiI6MTY5NDAxMDI3NH0.hrAXmqdGraAxi4-G1bbp7V41PIClh6mO2X7T1CmSZUlhjca4YXj5ThyFJ_2EQmKQuoU7z4s1D-wakrEwdyxyu9hTHIac_X_VUVYpdHU7obldRyMZGNVGESvPwtDSZu1Igq21VO1sXt2QETLRqUzhsi2yrNQ6N5R9KYJm9ykozj28kA8PyXsWi4Q-iMCi0rwXG1Afx5HuqwDCTDGgAObRhThWiaYQStf8Tyc82G3hhdVK7jHZ6k3f37aoraT5NTlO-8ZwZzAxzXKxiMQb3I5stsDSBBqO5yg4bLL4J_Q7no1dxpCG2msSttSNMWokcrOi63S53iqsPy7rFDsvehez-Q%26wid%3D00a991b2-4549-4577-b618-ed3cf279b4de&data=05%7C01%7CSebastien.Penet%40microsoft.com%7C068bfa94398c4d8f130a08dbaee51a64%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638296071264344197%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=6GSYJmW7VmFKTNAsmvzz7M9dkdDyJ%2BesAvFFYeelfKw%3D&reserved=0) to upload the files <Hostname>-<date time>.7z available in D:\
     ```powershell
     mv d:\vmInfo.txt d:\xperf
     $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
     mv d:\xperf\ d:\$HOSTNAME-$DATETIME
     d:\azcopy.exe copy d:\$HOSTNAME-$DATETIME 'https://sebuploadfiles.blob.core.windows.net/xperf?sp=acw&st=2023-09-06T16:35:27Z&se=2023-09-07T00:35:27Z&spr=https&sv=2022-11-02&sr=c&sig=YaW6N40zb8JoY0TSfs%2FPr1jUasFI53ZW20FuRDQSkPA%3D' --recursive
     ```
+
+![addfiles](image.png)
+
 
 ## including diskspd test.
 >[!IMPORTANT]
