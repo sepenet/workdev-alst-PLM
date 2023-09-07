@@ -79,11 +79,25 @@
     $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
     $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
     $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
-    echo "HOSTNAME,RG,VMIDVALUE,XperfSTARTTIME" | out-file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
-    echo "$HOSTNAME,$RG,$VMIDVALUE,$DATETIME" | out-file -append d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
+    start-process -filepath D:\CDFControl.exe -ArgumentList '-start -guids D:\allModules.cdf -path D:\xperf -nopromp
     d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
+    start-process -filepath D:\CDFControl.exe -ArgumentList '-stop -noprompt'
     mv d:\xperf\*.etl d:\xperf\$HOSTNAME-$DATETIME.etl
+    Add-Type -AssemblyName PresentationCore,PresentationFramework
+    $ButtonType = [System.Windows.MessageBoxButton]::YesNo
+    $MessageIcon = [System.Windows.MessageBoxImage]::Question
+    $MessageBody = "How long was the start of PLM: BELOW 3min30s"
+    $MessageTitle = "PLM Start Time"
+    $Result = [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
     & 'C:\Program Files\7-Zip\7z.exe' a -T7z D:\$HOSTNAME-$DATETIME.7z D:\xperf\*
+    Add-Type -AssemblyName PresentationCore,PresentationFramework
+    $ButtonType = [System.Windows.MessageBoxButton]::Ok
+    $MessageIcon = [System.Windows.MessageBoxImage]::Warning
+    $MessageBody = "Traces were just zipped please make sure to upload the file to the support ticket the 7z file is located in D:\$HOSTNAME-$DATETIME.7z"
+    $MessageTitle = "Upload the file to the support ticket"
+    [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
+    echo "HOSTNAME,RG,VMIDVALUE,XperfSTARTTIME,STARTTIMEBELOWTHRESHOLD" | out-file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
+    echo "$HOSTNAME,$RG,$VMIDVALUE,$DATETIME,$RESULT" | out-file -append d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     notepad d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     ```
 >[!IMPORTANT]
