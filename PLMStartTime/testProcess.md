@@ -54,7 +54,7 @@
     ```
 ### Start collecting the trace
 >[!NOTE]
-> You will start soon to start recording the trace. As soon as the powershell windows is updated with the below grenish ribbon you can start PLM application as usual.
+> Next step is to start recording the trace. As soon as the powershell windows is updated with the below grenish ribbon you can start PLM application as usual.
 
 ![xperf](image-6.png)
 
@@ -75,8 +75,8 @@
     notepad d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     ```
 >[!IMPORTANT]
-> traces collection will start and last **15min** and will be saved in d:\xperf folder.
-> You can stop the trace by pressing **ctrl+c** in the powershell window.
+> traces collection recording will start and last **15min** and will be saved in d:\xperf folder.
+> You can stop the trace by pressing **ctrl+c** in the powershell window. In __any case__ please wait for PLM test to complete before stopping the trace.
 
 command prompt windows will open automatically after the trace recording is stopped to save it in the file, let it runs, it closes automatically
 
