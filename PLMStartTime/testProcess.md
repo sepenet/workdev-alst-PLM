@@ -7,7 +7,7 @@
 - [ ] Open powershell as Administrator and run the below command to download the ADKsetup tool.
     ```powershell
     Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2165884 -outFile d:\adksetup.exe
-    d:\adksetup.exe /quiet /installpath /features OptionId.WindowsPerformanceToolkit
+    d:\adksetup.exe /quiet /features OptionId.WindowsPerformanceToolkit
     ```
 ### Install Az powershell module.
 
@@ -55,14 +55,12 @@
     $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
     $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
     $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
-    echo "HOSTNAME,RG,VMIDVALUE,PLMSTARTTIME,PLMSTOPTIME" | out-file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
-    echo "$HOSTNAME,$RG,$VMIDVALUE,$PLMSTARTTIME,$PLMSTOPTIME" | out-file -append d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
+    echo "HOSTNAME,RG,VMIDVALUE,XperfSTARTTIME" | out-file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
+    echo "$HOSTNAME,$RG,$VMIDVALUE,$DATETIME" | out-file -append d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
     mv d:\xperf\*.etl d:\xperf\$HOSTNAME-$DATETIME.etl
     & 'C:\Program Files\7-Zip\7z.exe' a -T7z D:\$HOSTNAME-$DATETIME.7z D:\xperf\*
-    ```
-    
-    
+    notepad d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     ```
 >[!IMPORTANT]
 > traces collection will start and last **15min** and will be saved in d:\xperf folder.
@@ -84,12 +82,18 @@ command prompt windows open automatically after the trace is stopped to save it 
 - [ ] open edge browser and go to [File Transfer - Case 2309060050003065](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsupport.microsoft.com%2Ffiles%3Fworkspace%3DeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ3c2lkIjoiMDBhOTkxYjItNDU0OS00NTc3LWI2MTgtZWQzY2YyNzliNGRlIiwic3IiOiIyMzA5MDYwMDUwMDAzMDY1IiwiYXBwaWQiOiJlNmVlNDNlYi0wZmJjLTQ1NDYtYmM1Mi00YzE2MWZjZGY0YzQiLCJzdiI6InYxIiwicnMiOiJFeHRlcm5hbCIsInd0aWQiOiIzNzc0YTY2Ni00ZDBjLTQ0NjUtYjQzYS01ZDcyNzBiMmM0ZWQiLCJpc3MiOiJodHRwczovL2FwaS5kdG1uZWJ1bGEubWljcm9zb2Z0LmNvbSIsImF1ZCI6Imh0dHA6Ly9zbWMiLCJleHAiOjE3MDE3ODYyNzQsIm5iZiI6MTY5NDAxMDI3NH0.hrAXmqdGraAxi4-G1bbp7V41PIClh6mO2X7T1CmSZUlhjca4YXj5ThyFJ_2EQmKQuoU7z4s1D-wakrEwdyxyu9hTHIac_X_VUVYpdHU7obldRyMZGNVGESvPwtDSZu1Igq21VO1sXt2QETLRqUzhsi2yrNQ6N5R9KYJm9ykozj28kA8PyXsWi4Q-iMCi0rwXG1Afx5HuqwDCTDGgAObRhThWiaYQStf8Tyc82G3hhdVK7jHZ6k3f37aoraT5NTlO-8ZwZzAxzXKxiMQb3I5stsDSBBqO5yg4bLL4J_Q7no1dxpCG2msSttSNMWokcrOi63S53iqsPy7rFDsvehez-Q%26wid%3D00a991b2-4549-4577-b618-ed3cf279b4de&data=05%7C01%7CSebastien.Penet%40microsoft.com%7C068bfa94398c4d8f130a08dbaee51a64%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C638296071264344197%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=6GSYJmW7VmFKTNAsmvzz7M9dkdDyJ%2BesAvFFYeelfKw%3D&reserved=0) to upload the files <Hostname>-<date time>.7z available in D:\
 
 ![addfiles](image.png)
-    <!-- ```powershell
-    mv d:\vmInfo.txt d:\xperf
-    $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
-    mv d:\xperf\ d:\$HOSTNAME-$DATETIME
-    d:\azcopy.exe copy d:\$HOSTNAME-$DATETIME 'https://sebuploadfiles.blob.core.windows.net/xperf?sp=acw&st=2023-09-06T16:35:27Z&se=2023-09-07T00:35:27Z&spr=https&sv=2022-11-02&sr=c&sig=YaW6N40zb8JoY0TSfs%2FPr1jUasFI53ZW20FuRDQSkPA%3D' --recursive
-    ``` -->
+
+## Placeholder for info how to report to support. 
+>[!IMPORTANT]
+> please report it to support and provide the following information:
+> copy the content of the file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt opened in notepad and paste it in the support ticket.
+
+<!-- ```powershell
+mv d:\vmInfo.txt d:\xperf
+$DATETIME=get-date -format "dd-MMM-HH-mm-ss"
+mv d:\xperf\ d:\$HOSTNAME-$DATETIME
+d:\azcopy.exe copy d:\$HOSTNAME-$DATETIME 'https://sebuploadfiles.blob.core.windows.net/xperf?sp=acw&st=2023-09-06T16:35:27Z&se=2023-09-07T00:35:27Z&spr=https&sv=2022-11-02&sr=c&sig=YaW6N40zb8JoY0TSfs%2FPr1jUasFI53ZW20FuRDQSkPA%3D' --recursive
+``` -->
 
 
 <!-- ## including diskspd test.
