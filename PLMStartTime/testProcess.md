@@ -8,7 +8,11 @@
     ```powershell
     Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2165884 -outFile d:\adksetup.exe
     d:\adksetup.exe
-    ```
+
+>[!NOTE]
+> if you get the following screen click "**Close**" and continue with the next step install Az powershell module.
+<img src="image-1.png" width="200" />
+
 - [ ] in "Specify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
 ![location](image-4.png)
 - [ ] Select the privacy yes or no and click "**next**"
