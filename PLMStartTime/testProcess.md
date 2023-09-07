@@ -97,7 +97,7 @@ command prompt windows will open automatically after the trace recording is stop
 ## Placeholder for info how to report to support. 
 >[!IMPORTANT]
 > please report it to support and provide the following information:
-> copy the content of the file d:\xperf\\<Hostname\>-\<date time\>-vmInfo.txt opened in notepad and paste it in the support ticket.
+> copy the content of the file d:\xperf\\<Hostname\>-\<date time\>-vmInfo.txt opened automatically in notepad and paste it in the support ticket.
 
 <!-- ```powershell
 mv d:\vmInfo.txt d:\xperf
