@@ -79,7 +79,7 @@
     $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
     $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
     $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
-    start-process -filepath D:\CDFControl.exe -ArgumentList '-start -guids D:\allModules.cdf -path D:\xperf -nopromp
+    start-process -filepath D:\CDFControl.exe -ArgumentList '-start -guids D:\allModules.cdf -path D:\xperf -nopromp'
     d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
     start-process -filepath D:\CDFControl.exe -ArgumentList '-stop -noprompt'
     mv d:\xperf\*.etl d:\xperf\$HOSTNAME-$DATETIME.etl
