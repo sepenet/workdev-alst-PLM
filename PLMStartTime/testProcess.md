@@ -53,9 +53,9 @@
 
 - [ ] run the following commands to download and expand CDFControl tool
     ```powershell
-    Invoke-WebRequest -Uri https://github.com/sepenet/workdev-alst-PLM/raw/main/PLMStartTime/CDFControl.zip -outFile d:\CDFControl.zip
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/PLMStartTime/CDFControl.zip -outFile d:\CDFControl.zip
     Expand-Archive -path d:\CDFControl.zip -destinationpath d:
-    Invoke-WebRequest -Uri https://github.com/sepenet/workdev-alst-PLM/raw/main/PLMStartTime/allModules -outFile d:\AllModules.cdf
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/PLMStartTime/allModules.cdf -outFile d:\AllModules.cdf
     ```
 
 ### dowload the script which start the trace recording.
@@ -81,7 +81,6 @@
     $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
     echo "HOSTNAME,RG,VMIDVALUE,XperfSTARTTIME" | out-file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     echo "$HOSTNAME,$RG,$VMIDVALUE,$DATETIME" | out-file -append d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
-    Start-Process powershell {D:\CDFControl.exe -start -guids D:\allModules.ctl -path D:\xperf}
     d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
     mv d:\xperf\*.etl d:\xperf\$HOSTNAME-$DATETIME.etl
     & 'C:\Program Files\7-Zip\7z.exe' a -T7z D:\$HOSTNAME-$DATETIME.7z D:\xperf\*
