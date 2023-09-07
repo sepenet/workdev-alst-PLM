@@ -55,6 +55,7 @@
 ### Start collecting the trace
 >[!NOTE]
 > You will start soon to start recording the trace. As soon as the powershell windows is updated with the below grenish ribbon you can start PLM application as usual.
+
 ![xperf](image-6.png)
 
 - [ ] run the following commands to create folder to collect VM info and to start traces recording
@@ -78,6 +79,7 @@
 > You can stop the trace by pressing **ctrl+c** in the powershell window.
 
 command prompt windows will open automatically after the trace recording is stopped to save it in the file, let it runs, it closes automatically
+
 ![savefile](image-7.png)
 
 >[!WARNING]
