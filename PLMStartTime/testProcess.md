@@ -26,7 +26,7 @@
     ```
 > Accept the installation of the module and dependencies by typing  **A** or **Y** and press enter
 > this will take few minutes to complete
-- [ ] Run the followinf commands to import the modules, login to azure using the user assigned managed identity, and get the vmID
+- [ ] Run the following commands to import the modules, login to azure using the user assigned managed identity.
     ```powershell
     Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
     Import-module az.accounts
@@ -46,15 +46,18 @@
     mv d:\azcopy_windows_*\azcopy.exe d:\azcopy.exe
     ``` -->
 
-### dowload the script to start the trace.
+### dowload the script which start the trace recording.
 
 - [ ] run the following commands to create  to download the xperfStartup.ps1 file 
     ```powershell
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1
     ```
 ### Start collecting the trace
+>[!NOTE]
+> You will start soon to start recording the trace. As soon as the powershell windows is updated with the below grenish ribbon you can start PLM application as usual.
+![xperf](image-6.png)
 
-- [ ] run the following commands to create folder to collect VM info and to start the xperf recording
+- [ ] run the following commands to create folder to collect VM info and to start traces recording
     ```powershell
     mkdir d:\xperf
     $HOSTNAME=$env:computername
@@ -72,11 +75,9 @@
     ```
 >[!IMPORTANT]
 > traces collection will start and last **15min** and will be saved in d:\xperf folder.
-> You can stop the trace by pressing **ctrl+c** in the command prompt.
-> You might have to do ctrl+c __twice__ to stop the trace.
+> You can stop the trace by pressing **ctrl+c** in the powershell window.
 
-![xperf](image-6.png)
-command prompt windows open automatically after the trace is stopped to save it in the file, let it runs and close automatically
+command prompt windows will open automatically after the trace recording is stopped to save it in the file, let it runs, it closes automatically
 ![savefile](image-7.png)
 
 >[!WARNING]
