@@ -53,9 +53,9 @@
 
 - [ ] run the following commands to download and expand CDFControl tool
     ```powershell
-    Invoke-WebRequest -Uri https://github.com/sepenet/workdev-alst-PLM/raw/main/PLMStartTime/CDFControl.zip -outFile d:\CDFControl.zip
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/PLMStartTime/CDFControl.zip -outFile d:\CDFControl.zip
     Expand-Archive -path d:\CDFControl.zip -destinationpath d:
-    Invoke-WebRequest -Uri https://github.com/sepenet/workdev-alst-PLM/raw/main/PLMStartTime/allModules -outFile d:\AllModules.cdf
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/PLMStartTime/allModules.cdf -outFile d:\AllModules.cdf
     ```
 
 ### dowload the script which start the trace recording.
@@ -79,7 +79,7 @@
     $VMPROPERTIES=get-azvm -name $HOSTNAME -displayHint expand -resourcegroupname $RG
     $VMIDVALUE=$VMPROPERTIES.psobject.properties["VmId"].value
     $DATETIME=get-date -format "dd-MMM-HH-mm-ss"
-    start-process -filepath D:\CDFControl.exe -ArgumentList '-start -guids D:\allModules.cdf -path D:\xperf -noprompt'
+    start-process -filepath D:\CDFControl.exe -ArgumentList '-start -guids D:\allModules.cdf -path D:\xperf -nopromp
     d:\xperfStartup.ps1 -pathETL d:\xperf -Save:$True
     start-process -filepath D:\CDFControl.exe -ArgumentList '-stop -noprompt'
     mv d:\xperf\*.etl d:\xperf\$HOSTNAME-$DATETIME.etl
