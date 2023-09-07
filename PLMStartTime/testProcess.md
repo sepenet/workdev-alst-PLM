@@ -11,7 +11,7 @@
 
 >[!NOTE]
 > if you get the following screen click "**Close**" and continue with the next step install Az powershell module.
-<img src="image-1.png" width="480" />
+<img src="image-2.png" width="480" />
 
 - [ ] in "Specify Location" window, make sure **install the windows assess...** is selected and click on "**next**"
 ![location](image-4.png)
