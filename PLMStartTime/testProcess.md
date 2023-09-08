@@ -2,7 +2,7 @@
 
 ## without disk speed test
 
-### Install ADKsetup tool
+<!-- ### Install ADKsetup tool
 
 - [ ] Open powershell as Administrator and run the below command to download the ADKsetup tool.
     ```powershell
@@ -19,7 +19,7 @@
 - [ ] Read and accept the license terms and click "**next**"
 - [ ] uncheck all except windows performance toolkit and click "**install**"
 ![WPT](image-5.png)
-- [ ] wait for the installation to complete and click "**close**"
+- [ ] wait for the installation to complete and click "**close**" -->
 
 ### Install Az powershell module.
 
@@ -27,6 +27,7 @@
     ```powershell
     Install-Module -Name Az.accounts,Az.Resources -AllowClobber
     Install-Module -Name Az.Compute
+
     ```
 > Accept the installation of the module and dependencies by typing  **A** or **Y** and press enter
 > this will take few minutes to complete
@@ -37,6 +38,7 @@
     Import-module az.resources
     Import-module az.compute
     Connect-AzAccount -identity
+
     ```
 >[!IMPORTANT]
 > Accept the execution policy change by typing  **A**
