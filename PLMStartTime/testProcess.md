@@ -51,14 +51,14 @@
     Expand-Archive -path d:\azcopy.zip -destinationpath d:
     mv d:\azcopy_windows_*\azcopy.exe d:\azcopy.exe
     ``` -->
-### Download Citrix CDFControl tool
+<!-- ### Download Citrix CDFControl tool
 
 - [ ] run the following commands to download and expand CDFControl tool
     ```powershell
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/PLMStartTime/CDFControl.zip -outFile d:\CDFControl.zip
     Expand-Archive -path d:\CDFControl.zip -destinationpath d:
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/PLMStartTime/allModules.cdf -outFile d:\AllModules.cdf
-    ```
+    ``` -->
 
 ### dowload the script which start the trace recording.
 
