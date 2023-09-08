@@ -65,6 +65,7 @@
 - [ ] run the following commands to create  to download the xperfStartup.ps1 file 
     ```powershell
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/sepenet/workdev-alst-PLM/main/MonitoringTroubleshoot/xperfStartup.ps1 -outFile d:\xperfStartup.ps1
+
     ```
 ### Start collecting the trace
 >[!NOTE]
@@ -95,12 +96,13 @@
     Add-Type -AssemblyName PresentationCore,PresentationFramework
     $ButtonType = [System.Windows.MessageBoxButton]::Ok
     $MessageIcon = [System.Windows.MessageBoxImage]::Warning
-    $MessageBody = "Traces were just zipped please make sure to upload the file to the support ticket the 7z file is located in D:\$HOSTNAME-$DATETIME.7z"
+    $MessageBody = "Traces were just zipped please make sure to upload the file to the support ticket the 7z file is located in D:\*-$HOSTNAME-$DATETIME-$RESULT.7z"
     $MessageTitle = "Upload the file to the support ticket"
     [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
     echo "HOSTNAME,RG,VMIDVALUE,XperfSTARTTIME,STARTTIMEABOVE-BELOW" | out-file d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     echo "$HOSTNAME,$RG,$VMIDVALUE,$DATETIME,$RESULT" | out-file -append d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
     notepad d:\xperf\$HOSTNAME-$DATETIME-vmInfo.txt
+
     ```
 >[!IMPORTANT]
 > traces collection recording will start and last **15min** and will be saved in d:\xperf folder.
